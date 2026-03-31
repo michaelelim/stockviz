@@ -76,8 +76,24 @@
 
         <!-- Chart -->
         <section class="card chart-card hidden" id="stepChart">
+            <div class="indicators">
+                <button class="ind-btn" data-ind="sma20">SMA 20</button>
+                <button class="ind-btn" data-ind="sma50">SMA 50</button>
+                <button class="ind-btn" data-ind="ema9">EMA 9</button>
+                <button class="ind-btn" data-ind="rsi">RSI 14</button>
+                <button class="ind-btn" data-ind="macd">MACD</button>
+            </div>
             <div class="chart-wrap">
                 <canvas id="mainChart"></canvas>
+                <canvas id="rsiChart" class="hidden"></canvas>
+                <canvas id="macdChart" class="hidden"></canvas>
+            </div>
+            <div class="save-row">
+                <button class="btn small" id="saveLocalBtn">💾 Save</button>
+                <button class="btn small" id="loadLocalBtn">📂 Load Saved</button>
+                <button class="btn small" id="shareBtn">🔗 Share Link</button>
+                <button class="btn small" id="exportBtn">⬇ Export JSON</button>
+                <button class="btn small" id="importBtn">📁 Import JSON</button>
             </div>
             <div class="chart-actions">
                 <button class="btn small" id="resetBtn">Reset All</button>
