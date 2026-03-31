@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockViz — Compare Your Trades vs Buy & Hold</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'><path d='M3.5 18.5L9 13l4 4 7.5-8.5'/><circle cx='13' cy='17' r='2'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <main class="app">
+        <!-- Header -->
+        <header>
+            <div class="logo"><span class="logo-icon">📈</span><span class="logo-text">StockViz</span></div>
+            <p class="subtitle">Compare your trades vs buy & hold — visually.</p>
+        </header>
+
+        <!-- STEP 1: Data Input -->
+        <section class="card step" id="stepData">
+            <div class="step-header">
+                <div class="step-num">1</div>
+                <div class="step-title">Load Price Data</div>
+            </div>
+            <div class="input-tabs">
+                <button class="input-tab active" data-tab="upload">📁 Upload CSV</button>
+                <button class="input-tab" data-tab="paste">📋 Paste Data</button>
+            </div>
+            <div class="tab-panel active" id="panelUpload">
+                <div class="drop-zone" id="csvDrop">
+                    <p>Drop CSV here or <span class="link">browse</span></p>
+                </div>
+                <p class="file-name hidden" id="fileName"></p>
+                <p class="hint">CSV format: <code>date,close</code> (one per line). First line is header.</p>
+            </div>
+            <div class="tab-panel" id="panelPaste">
+                <textarea id="pasteArea" rows="6" placeholder="Date,Close&#10;2025-01-02,203.50&#10;2025-01-03,204.20"></textarea>
+                <button class="btn" id="parseBtn">Parse Data</button>
+            </div>
+        </section>
+
+        <!-- STEP 2: Place Trades -->
+        <section class="card step hidden" id="stepTrades">
+            <div class="step-header">
+                <div class="step-num">2</div>
+                <div class="step-title">Place Your Trades</div>
+            </div>
+            <p class="hint">Click on the chart to place buy/sell markers. Or add manually below.</p>
+            <div class="trade-input">
+                <select id="tradeType">
+                    <option value="buy">🟢 Buy</option>
+                    <option value="sell">🔴 Sell</option>
+                </select>
+                <input type="number" id="tradePrice" placeholder="Price" step="0.01">
+                <input type="number" id="tradeQty" placeholder="Qty" value="1">
+                <button class="btn small" id="addTradeBtn">Add Trade</button>
+            </div>
+            <div class="trades-list" id="tradesList"></div>
+        </section>
+
+        <!-- STEP 3: Results -->
+        <section class="card step hidden" id="stepResults">
+            <div class="step-header">
+                <div class="step-num">3</div>
+                <div class="step-title">Results</div>
+            </div>
+            <div class="stats-row" id="statsRow">
+                <div class="stat"><span class="stat-val" id="statYourReturn">—</span><span class="stat-lbl">Your Strategy</span></div>
+                <div class="stat"><span class="stat-val" id="statBuyHold">—</span><span class="stat-lbl">Buy & Hold</span></div>
+                <div class="stat"><span class="stat-val" id="statDiff">—</span><span class="stat-lbl">Difference</span></div>
+            </div>
+        </section>
+
+        <!-- Chart -->
+        <section class="card chart-card hidden" id="stepChart">
+            <div class="chart-wrap">
+                <canvas id="mainChart"></canvas>
+            </div>
+            <div class="chart-actions">
+                <button class="btn small" id="resetBtn">Reset All</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Built by <a href="https://michaelelim.github.io/" target="_blank">Michael Lim</a> · All calculations client-side</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.1.0/dist/chartjs-plugin-annotation.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

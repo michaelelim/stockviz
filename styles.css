@@ -1,0 +1,87 @@
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080c18;--bg2:rgba(15,23,42,.75);--text:#eaedf5;--text2:#94a3b8;--text3:#475569;
+--accent:#38bdf8;--accent2:#818cf8;--green:#10b981;--green2:#34d399;--red:#ef4444;--red2:#f87171;
+--border:rgba(255,255,255,.08);--radius:14px;--font:'Inter',system-ui,sans-serif;
+--glow1:rgba(56,179,248,.25);--glow2:rgba(130,92,246,.15)}
+html,body{height:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);overflow-x:hidden;position:relative}
+.bg-glow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-glow::before,.bg-glow::after{content:'';position:absolute;border-radius:50%;filter:blur(110px);opacity:.25}
+.bg-glow::before{width:550px;height:550px;background:radial-gradient(circle,rgba(56,189,248,.5),transparent 70%);top:-8%;left:-8%;animation:aA 30s ease-in-out infinite alternate}
+.bg-glow::after{width:450px;height:450px;background:radial-gradient(circle,rgba(130,92,246,.4),transparent 70%);bottom:-12%;right:-8%;animation:aB 35s ease-in-out infinite alternate}
+@keyframes aA{0%{transform:translate(0,0)}100%{transform:translate(50px,30px) scale(1.12)}}
+@keyframes aB{0%{transform:translate(0,0)}100%{transform:translate(-30px,-50px) scale(.92)}}
+.hidden{display:none!important}
+
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 18px 60px;display:flex;flex-direction:column;gap:18px}
+
+header{text-align:center;margin-bottom:16px}
+.logo{display:flex;align-items:center;justify-content:center;gap:10px}
+.logo-icon{font-size:28px}.logo-text{font-size:32px;font-weight:900;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px}
+.subtitle{font-size:14px;color:var(--text2);margin-top:4px}
+
+/* Card */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(14px);animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* Step header */
+.step-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.step-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-title{font-size:18px;font-weight:700}
+
+/* Tabs */
+.input-tabs{display:flex;gap:6px;margin-bottom:14px}
+.input-tab{flex:1;padding:9px 12px;background:rgba(255,255,255,.04);border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .2s;font-family:var(--font)}
+.input-tab:hover{border-color:var(--accent)}.input-tab.active{background:rgba(56,189,248,.12);border-color:var(--accent);color:var(--accent)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* Drop zone */
+.drop-zone{background:rgba(255,255,255,.03);border:2px dashed var(--border);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:all .25s}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--accent);background:rgba(56,189,248,.06)}
+.link{color:var(--accent);font-weight:600;text-decoration:underline}
+.hint{font-size:11px;color:var(--text3);margin-top:8px}
+.file-name{font-size:12px;color:var(--green);font-weight:600;margin-top:8px}
+
+/* Textarea */
+textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:var(--mono);background:rgba(255,255,255,.04);color:var(--text);resize:vertical;outline:none}
+textarea:focus{border-color:var(--accent)}
+
+/* Buttons */
+.btn{background:linear-gradient(135deg,#38bdf8,#818cf8);color:#fff;border:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;font-family:var(--font)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(56,189,248,.3)}
+.btn.small{padding:8px 16px;font-size:12px}
+.chart-actions{text-align:center;margin-top:14px}
+
+/* Trade input row */
+.trade-input{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.trade-input select,.trade-input input{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;font-family:var(--font);color:var(--text);outline:none}
+.trade-input input:focus,.trade-input select:focus{border-color:var(--accent)}
+.trade-input select{color:var(--text)}
+.trades-list{max-height:160px;overflow-y:auto;margin-top:8px}
+.trade-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,.03);border-radius:8px;margin-bottom:4px;font-size:12px}
+.trade-item.buy{border-left:3px solid var(--green)}
+.trade-item.sell{border-left:3px solid var(--red)}
+.trade-remove{background:none;border:none;color:var(--red);font-size:16px;cursor:pointer;padding:0 4px}
+
+/* Stats row */
+.stats-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:0}
+.stat{display:flex;flex-direction:column;align-items:center;min-width:140px;padding:12px 16px;background:rgba(255,255,255,.04);border-radius:10px}
+.stat-val{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+.stat-val.pos{color:var(--green)}.stat-val.neg{color:var(--red)}.stat-val.neutral{color:var(--accent)}
+.stat-lbl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+/* Chart */
+.chart-card{padding:0}
+.chart-wrap{position:relative;width:100%;min-height:420px}
+.chart-wrap canvas{width:100%!important;height:420px!important;padding:16px 20px}
+
+footer{text-align:center;padding:28px 20px 0;border-top:1px solid var(--border);margin-top:12px}
+footer p{font-size:12px;color:var(--text3)}footer a{color:var(--accent);text-decoration:none}footer a:hover{text-decoration:underline}
+
+@media(max-width:600px){
+    .app{padding:28px 12px 40px}
+    .logo-text{font-size:24px}
+    .chart-wrap canvas{height:300px!important}
+    .stats-row{flex-direction:column}
+    .trade-input{flex-direction:column}
+}
